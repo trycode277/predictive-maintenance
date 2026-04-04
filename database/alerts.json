@@ -1,0 +1,2402 @@
+[
+    {
+        "timestamp": "2026-04-04T13:59:28Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 87.7 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T13:59:30Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is elevated at 88.5 C versus the machine baseline.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T13:59:32Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 84,
+        "summary": "Temperature is elevated at 89.5 C versus the machine baseline.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T13:59:34Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 70,
+        "summary": "Temperature is elevated at 89.3 C versus the machine baseline.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T13:59:37Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 80,
+        "summary": "Temperature is elevated at 89.2 C versus the machine baseline.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T13:59:40Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Temperature is drifting above the expected operating range at 87.1 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T13:59:44Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 70,
+        "summary": "Temperature is elevated at 88.6 C versus the machine baseline.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T14:00:02Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 66,
+        "summary": "Vibration reached 3.27 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:00:02Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 70,
+        "summary": "Temperature is drifting above the expected operating range at 83.6 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T14:00:05Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 84,
+        "summary": "No fresh data received for 4 seconds.",
+        "action": "Check the stream connection and machine telemetry source."
+    },
+    {
+        "timestamp": "2026-04-04T14:00:05Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 80,
+        "summary": "Temperature is drifting above the expected operating range at 85.5 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T14:00:07Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Vibration reached 2.66 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:00:07Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Temperature is drifting above the expected operating range at 85.5 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T14:00:07Z",
+        "machine_id": "LATHE_01",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Temperature is drifting above the expected operating range at 80.0 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:00:09Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 82,
+        "summary": "Vibration reached 2.96 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:00:09Z",
+        "machine_id": "LATHE_01",
+        "severity": "warning",
+        "risk_score": 72,
+        "summary": "Vibration reached 2.18 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:00:13Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "No fresh data received for 5 seconds.",
+        "action": "Check the stream connection and machine telemetry source."
+    },
+    {
+        "timestamp": "2026-04-04T14:00:15Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 82,
+        "summary": "Vibration reached 3.35 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:00:17Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Temperature is drifting above the expected operating range at 82.5 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:01:31Z",
+        "machine_id": "LATHE_01",
+        "severity": "critical",
+        "risk_score": 98,
+        "summary": "Temperature is drifting above the expected operating range at 80.1 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:01:34Z",
+        "machine_id": "LATHE_01",
+        "severity": "warning",
+        "risk_score": 72,
+        "summary": "Vibration reached 2.51 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:01:36Z",
+        "machine_id": "LATHE_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Vibration reached 2.25 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:01:40Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Vibration reached 2.87 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:01:42Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 83.7 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T14:01:44Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 72,
+        "summary": "Vibration reached 2.75 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:01:52Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 68,
+        "summary": "Vibration reached 2.77 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:01:55Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Vibration reached 3.25 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:01:57Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 80.6 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:01:59Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 80.8 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:02:01Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Vibration reached 2.61 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:02:03Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Vibration reached 2.44 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:02:18Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Temperature is drifting above the expected operating range at 83.1 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T14:02:20Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 70,
+        "summary": "Temperature is drifting above the expected operating range at 82.9 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T14:02:22Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Temperature is drifting above the expected operating range at 83.4 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T14:02:24Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Temperature is drifting above the expected operating range at 84.8 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T14:02:26Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Temperature is drifting above the expected operating range at 85.5 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T14:02:44Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 68,
+        "summary": "Vibration reached 2.75 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:02:46Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 96,
+        "summary": "Vibration reached 3.12 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:02:48Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Vibration reached 2.67 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:03:03Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 72,
+        "summary": "Vibration reached 2.44 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:21:56Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Temperature is drifting above the expected operating range at 82.5 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:21:58Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Temperature is drifting above the expected operating range at 83.7 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:22:00Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Temperature is drifting above the expected operating range at 85.0 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:31:27Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Temperature is drifting above the expected operating range at 84.6 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:31:29Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Temperature is drifting above the expected operating range at 82.8 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:31:57Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Temperature is drifting above the expected operating range at 82.8 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T14:32:00Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 66,
+        "summary": "Temperature is drifting above the expected operating range at 84.3 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T14:32:02Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Temperature is drifting above the expected operating range at 85.1 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T14:32:04Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 72,
+        "summary": "No fresh data received for 4 seconds.",
+        "action": "Check the stream connection and machine telemetry source."
+    },
+    {
+        "timestamp": "2026-04-04T14:32:35Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Vibration reached 2.23 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:32:37Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Vibration reached 2.55 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:32:39Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 80.3 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:32:41Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Vibration reached 3.42 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:32:43Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "No fresh data received for 3 seconds.",
+        "action": "Check the stream connection and machine telemetry source."
+    },
+    {
+        "timestamp": "2026-04-04T14:32:45Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 78,
+        "summary": "Vibration reached 2.97 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:32:47Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 78,
+        "summary": "Vibration reached 3.48 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:32:50Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 68,
+        "summary": "Vibration reached 3.13 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:32:52Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 64,
+        "summary": "Vibration reached 2.94 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:33:00Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 82,
+        "summary": "Vibration reached 2.74 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:33:03Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 96,
+        "summary": "Vibration reached 3.18 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:33:05Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 72,
+        "summary": "Vibration reached 2.76 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:33:08Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 72,
+        "summary": "Vibration reached 2.44 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:33:17Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 70,
+        "summary": "Temperature is drifting above the expected operating range at 83.7 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T14:33:42Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Vibration reached 2.32 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:33:44Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Vibration reached 2.84 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:33:47Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 81.0 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:33:49Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 82,
+        "summary": "Vibration reached 2.45 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:33:49Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 82,
+        "summary": "Vibration reached 2.86 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:33:51Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 84,
+        "summary": "Temperature is drifting above the expected operating range at 80.2 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:33:51Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 98,
+        "summary": "Temperature is drifting above the expected operating range at 82.2 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:33:53Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 84,
+        "summary": "Temperature is drifting above the expected operating range at 80.4 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:33:53Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 85.9 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T14:33:55Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 66,
+        "summary": "Temperature is drifting above the expected operating range at 81.2 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T14:33:55Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 83.7 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:33:57Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 60,
+        "summary": "Vibration reached 2.42 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:34:31Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 96,
+        "summary": "Vibration reached 3.16 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:34:33Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 80.8 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T14:34:35Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 80.6 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:34:38Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 86,
+        "summary": "Vibration reached 2.83 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:34:40Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Temperature is drifting above the expected operating range at 80.5 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:34:42Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 72,
+        "summary": "Temperature is drifting above the expected operating range at 81.7 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T14:34:44Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 72,
+        "summary": "Temperature is drifting above the expected operating range at 83.4 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T14:34:44Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 80,
+        "summary": "Temperature is drifting above the expected operating range at 83.2 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T14:34:46Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 70,
+        "summary": "Temperature is drifting above the expected operating range at 83.2 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T14:34:46Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Temperature is drifting above the expected operating range at 83.0 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T14:34:49Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Temperature is drifting above the expected operating range at 82.8 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T14:34:49Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Temperature is drifting above the expected operating range at 83.7 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T14:34:51Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Temperature is drifting above the expected operating range at 82.3 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T14:35:02Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Vibration reached 2.04 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:35:07Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 80,
+        "summary": "Vibration reached 2.23 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:35:09Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Vibration reached 2.93 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:35:11Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 94,
+        "summary": "Vibration reached 2.90 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:52:21Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 80,
+        "summary": "Temperature is drifting above the expected operating range at 83.1 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T14:52:23Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 84.5 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:52:24Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 86.8 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T14:52:28Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 87.6 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T14:52:31Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 62,
+        "summary": "RPM deviated from the baseline by +3.4 standard deviations.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T14:52:31Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 84.7 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:52:32Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Temperature is drifting above the expected operating range at 83.8 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:52:34Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 62,
+        "summary": "Temperature is drifting above the expected operating range at 81.9 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:52:36Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Vibration reached 3.01 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:52:37Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 60,
+        "summary": "Vibration reached 3.18 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:52:39Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 86,
+        "summary": "Temperature is drifting above the expected operating range at 82.4 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:52:41Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 70,
+        "summary": "Vibration reached 3.43 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:52:44Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Vibration reached 3.60 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:52:50Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Vibration reached 3.15 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:52:52Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Vibration reached 3.18 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:52:53Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Vibration reached 3.36 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:52:55Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 82.2 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:52:57Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 84.7 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T14:52:58Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 98,
+        "summary": "Temperature is drifting above the expected operating range at 80.2 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:53:00Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Vibration reached 2.18 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:53:25Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Temperature is drifting above the expected operating range at 82.6 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T14:53:27Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 76,
+        "summary": "No fresh data received for 4 seconds.",
+        "action": "Check the stream connection and machine telemetry source."
+    },
+    {
+        "timestamp": "2026-04-04T14:53:28Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Temperature is drifting above the expected operating range at 82.4 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T14:53:28Z",
+        "machine_id": "LATHE_01",
+        "severity": "critical",
+        "risk_score": 82,
+        "summary": "Vibration reached 2.75 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:53:30Z",
+        "machine_id": "LATHE_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 81.9 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T14:53:32Z",
+        "machine_id": "LATHE_01",
+        "severity": "warning",
+        "risk_score": 72,
+        "summary": "Vibration reached 2.54 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:53:33Z",
+        "machine_id": "LATHE_01",
+        "severity": "warning",
+        "risk_score": 60,
+        "summary": "Vibration reached 2.35 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:53:35Z",
+        "machine_id": "LATHE_01",
+        "severity": "warning",
+        "risk_score": 60,
+        "summary": "Vibration reached 2.73 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:53:37Z",
+        "machine_id": "LATHE_01",
+        "severity": "critical",
+        "risk_score": 86,
+        "summary": "Temperature is drifting above the expected operating range at 81.0 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:53:38Z",
+        "machine_id": "LATHE_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 82.5 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:53:40Z",
+        "machine_id": "LATHE_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 84.6 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T14:53:41Z",
+        "machine_id": "LATHE_01",
+        "severity": "critical",
+        "risk_score": 88,
+        "summary": "Temperature is drifting above the expected operating range at 82.5 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:53:45Z",
+        "machine_id": "LATHE_01",
+        "severity": "warning",
+        "risk_score": 76,
+        "summary": "Temperature is drifting above the expected operating range at 82.2 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:53:46Z",
+        "machine_id": "LATHE_01",
+        "severity": "warning",
+        "risk_score": 76,
+        "summary": "Temperature is drifting above the expected operating range at 83.2 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:53:58Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Temperature is drifting above the expected operating range at 83.4 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T14:54:50Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Vibration reached 2.77 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:54:52Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Vibration reached 3.04 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:54:54Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Vibration reached 2.97 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:54:56Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 94,
+        "summary": "Vibration reached 2.40 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:54:57Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Vibration reached 2.18 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:55:23Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 82,
+        "summary": "Vibration reached 3.22 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:55:25Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Vibration reached 2.92 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:55:53Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 70,
+        "summary": "Temperature is drifting above the expected operating range at 81.5 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T14:55:55Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 70,
+        "summary": "Temperature is drifting above the expected operating range at 83.0 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T14:56:02Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 80,
+        "summary": "No fresh data received for 3 seconds.",
+        "action": "Check the stream connection and machine telemetry source."
+    },
+    {
+        "timestamp": "2026-04-04T14:56:04Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 83.3 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:56:07Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 83.7 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:56:09Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 84.0 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T14:56:11Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 87.3 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T14:56:12Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is elevated at 88.3 C versus the machine baseline.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T14:56:14Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Temperature is drifting above the expected operating range at 84.8 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:56:14Z",
+        "machine_id": "LATHE_01",
+        "severity": "warning",
+        "risk_score": 68,
+        "summary": "Vibration reached 3.39 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:56:16Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 80,
+        "summary": "Temperature is drifting above the expected operating range at 81.5 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:56:16Z",
+        "machine_id": "LATHE_01",
+        "severity": "critical",
+        "risk_score": 96,
+        "summary": "Vibration reached 3.37 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:56:17Z",
+        "machine_id": "LATHE_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 80.8 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T14:56:19Z",
+        "machine_id": "LATHE_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 82.5 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T14:56:21Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 62,
+        "summary": "Temperature is drifting above the expected operating range at 80.6 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:56:21Z",
+        "machine_id": "LATHE_01",
+        "severity": "warning",
+        "risk_score": 60,
+        "summary": "Vibration reached 2.45 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:56:23Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 81,
+        "summary": "No fresh data received for 4 seconds.",
+        "action": "Check the stream connection and machine telemetry source."
+    },
+    {
+        "timestamp": "2026-04-04T14:56:24Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 94,
+        "summary": "No fresh data received for 6 seconds.",
+        "action": "Check the stream connection and machine telemetry source."
+    },
+    {
+        "timestamp": "2026-04-04T14:56:40Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Temperature is drifting above the expected operating range at 82.0 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T14:57:03Z",
+        "machine_id": "LATHE_01",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Temperature is drifting above the expected operating range at 80.9 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T14:57:17Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 70,
+        "summary": "Temperature is drifting above the expected operating range at 83.7 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T14:57:24Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 76,
+        "summary": "Vibration reached 2.98 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:57:26Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 66,
+        "summary": "Vibration reached 2.67 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:57:29Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Temperature is drifting above the expected operating range at 80.6 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T14:57:31Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Temperature is drifting above the expected operating range at 81.4 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T14:57:32Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Temperature is drifting above the expected operating range at 82.2 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T14:57:34Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Temperature is drifting above the expected operating range at 81.7 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T14:57:50Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 76,
+        "summary": "Vibration reached 2.87 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:57:52Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 76,
+        "summary": "Vibration reached 3.08 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:57:54Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Vibration reached 3.21 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:58:14Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 88,
+        "summary": "Temperature is drifting above the expected operating range at 82.8 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:58:16Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 70,
+        "summary": "Temperature is drifting above the expected operating range at 83.0 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T14:58:18Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Temperature is drifting above the expected operating range at 83.6 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T14:58:20Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Temperature is drifting above the expected operating range at 84.1 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T14:58:23Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 70,
+        "summary": "Temperature is drifting above the expected operating range at 85.9 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T14:59:01Z",
+        "machine_id": "LATHE_01",
+        "severity": "critical",
+        "risk_score": 82,
+        "summary": "Vibration reached 3.29 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:59:03Z",
+        "machine_id": "LATHE_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 80.2 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:59:04Z",
+        "machine_id": "LATHE_01",
+        "severity": "warning",
+        "risk_score": 72,
+        "summary": "Vibration reached 2.56 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T14:59:11Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 80,
+        "summary": "Temperature is drifting above the expected operating range at 83.7 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T15:34:13Z",
+        "machine_id": "LATHE_01",
+        "severity": "critical",
+        "risk_score": 82,
+        "summary": "Vibration reached 2.93 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:34:15Z",
+        "machine_id": "LATHE_01",
+        "severity": "warning",
+        "risk_score": 72,
+        "summary": "Vibration reached 2.57 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:34:17Z",
+        "machine_id": "LATHE_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Vibration reached 2.07 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:34:55Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Vibration reached 3.41 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:34:59Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "No fresh data received for 4 seconds.",
+        "action": "Check the stream connection and machine telemetry source."
+    },
+    {
+        "timestamp": "2026-04-04T15:34:59Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 68,
+        "summary": "Temperature is drifting above the expected operating range at 82.0 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T15:35:00Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Vibration reached 3.34 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:35:00Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 68,
+        "summary": "Temperature is drifting above the expected operating range at 82.5 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T15:35:02Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 82.0 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T15:35:02Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 68,
+        "summary": "Temperature is drifting above the expected operating range at 82.3 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T15:35:04Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 80,
+        "summary": "Vibration reached 2.59 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:35:04Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 68,
+        "summary": "Temperature is drifting above the expected operating range at 82.5 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T15:35:05Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Vibration reached 2.20 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:43:01Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 82.1 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T15:47:24Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 60,
+        "summary": "Vibration reached 2.94 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:48:01Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 68,
+        "summary": "Vibration reached 3.25 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:48:25Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 80.5 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:48:26Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 81.3 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:48:29Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Temperature is drifting above the expected operating range at 80.6 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:48:30Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 64,
+        "summary": "Vibration reached 2.23 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:48:53Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Vibration reached 2.99 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:48:54Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Vibration reached 3.15 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:48:58Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Vibration reached 3.41 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:48:59Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Vibration reached 3.26 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:49:01Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Vibration reached 2.66 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:49:02Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Vibration reached 2.41 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:49:49Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 82,
+        "summary": "Vibration reached 3.48 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:49:49Z",
+        "machine_id": "LATHE_01",
+        "severity": "critical",
+        "risk_score": 82,
+        "summary": "Vibration reached 3.08 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:49:51Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 81.9 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T15:49:51Z",
+        "machine_id": "LATHE_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 81.2 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T15:49:53Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 81.3 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:49:53Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 80,
+        "summary": "Temperature is drifting above the expected operating range at 83.2 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T15:49:53Z",
+        "machine_id": "LATHE_01",
+        "severity": "warning",
+        "risk_score": 72,
+        "summary": "Vibration reached 2.49 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:49:54Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 85.0 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T15:49:56Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 85.9 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T15:49:58Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Temperature is drifting above the expected operating range at 82.4 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:50:00Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 82.6 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:50:02Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 83.8 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:50:03Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 85.9 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:50:07Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Temperature is drifting above the expected operating range at 81.4 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:50:51Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 80,
+        "summary": "Temperature is drifting above the expected operating range at 84.7 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T15:50:52Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 70,
+        "summary": "Temperature is drifting above the expected operating range at 83.4 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T15:50:59Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 85.7 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:51:01Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 87.1 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T15:51:02Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 84.0 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:51:04Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Temperature is drifting above the expected operating range at 82.2 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T15:51:06Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Temperature is drifting above the expected operating range at 80.8 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T15:51:07Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Temperature is drifting above the expected operating range at 81.0 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T15:51:09Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Temperature is drifting above the expected operating range at 82.3 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T15:51:16Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 66,
+        "summary": "Temperature is drifting above the expected operating range at 80.4 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:51:30Z",
+        "machine_id": "LATHE_01",
+        "severity": "critical",
+        "risk_score": 80,
+        "summary": "Temperature is drifting above the expected operating range at 80.4 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T15:51:32Z",
+        "machine_id": "LATHE_01",
+        "severity": "critical",
+        "risk_score": 98,
+        "summary": "Temperature is drifting above the expected operating range at 81.6 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:51:35Z",
+        "machine_id": "LATHE_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 83.7 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T15:51:36Z",
+        "machine_id": "LATHE_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 84.8 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T15:51:38Z",
+        "machine_id": "LATHE_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 85.0 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:51:39Z",
+        "machine_id": "LATHE_01",
+        "severity": "warning",
+        "risk_score": 66,
+        "summary": "Temperature is drifting above the expected operating range at 80.4 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:51:51Z",
+        "machine_id": "LATHE_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Temperature is drifting above the expected operating range at 80.6 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T15:51:52Z",
+        "machine_id": "LATHE_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Temperature is drifting above the expected operating range at 81.9 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T15:52:09Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 72,
+        "summary": "Vibration reached 2.13 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:52:11Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 72,
+        "summary": "Vibration reached 2.04 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:52:58Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 76,
+        "summary": "Vibration reached 2.91 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:53:00Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Vibration reached 3.26 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:53:03Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Vibration reached 3.35 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:53:13Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 64,
+        "summary": "Temperature is drifting above the expected operating range at 80.2 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T15:53:29Z",
+        "machine_id": "LATHE_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Vibration reached 2.87 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:53:30Z",
+        "machine_id": "LATHE_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Vibration reached 2.30 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:53:35Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Vibration reached 3.50 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:53:38Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Temperature is drifting above the expected operating range at 80.8 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T15:53:46Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Vibration reached 2.94 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:53:48Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Vibration reached 3.47 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:53:50Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Vibration reached 3.53 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:53:51Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Vibration reached 3.49 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:53:51Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Temperature is drifting above the expected operating range at 81.3 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T15:53:53Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Vibration reached 3.21 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:53:54Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 80.6 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:53:57Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Vibration reached 2.58 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:54:20Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 84,
+        "summary": "Temperature is drifting above the expected operating range at 82.2 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:54:21Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 85.2 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T15:54:23Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 98,
+        "summary": "Temperature is drifting above the expected operating range at 83.4 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T15:54:34Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Vibration reached 2.45 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:54:36Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 94,
+        "summary": "Vibration reached 2.71 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:54:37Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Vibration reached 3.03 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:54:38Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Vibration reached 3.09 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:54:38Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Vibration reached 3.05 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:54:40Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 68,
+        "summary": "Vibration reached 3.08 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:54:40Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 72,
+        "summary": "Vibration reached 2.79 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:54:49Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Temperature is drifting above the expected operating range at 80.2 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T15:54:55Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 80,
+        "summary": "Temperature is drifting above the expected operating range at 84.8 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T15:54:56Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 56,
+        "summary": "Temperature is drifting above the expected operating range at 83.6 C.",
+        "action": "Continue monitoring and watch for repeated warning patterns."
+    },
+    {
+        "timestamp": "2026-04-04T15:54:58Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 85.6 C.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:00Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 87.1 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:02Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 84.4 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:04Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 76,
+        "summary": "Temperature is drifting above the expected operating range at 82.5 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:11Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 82,
+        "summary": "Vibration reached 3.37 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:12Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 81.1 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:13Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 81.6 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:14Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 74,
+        "summary": "Vibration reached 2.81 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:16Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 70,
+        "summary": "Temperature is drifting above the expected operating range at 84.1 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:17Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 70,
+        "summary": "Temperature is drifting above the expected operating range at 84.4 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:18Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Temperature is drifting above the expected operating range at 84.2 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:20Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Temperature is drifting above the expected operating range at 85.8 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:21Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Temperature is drifting above the expected operating range at 86.9 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:24Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Temperature is drifting above the expected operating range at 86.7 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:25Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 58,
+        "summary": "Temperature is drifting above the expected operating range at 84.1 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:30Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 83.6 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:32Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 85.0 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:33Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 85.3 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:34Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is elevated at 89.5 C versus the machine baseline.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:36Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is elevated at 90.2 C versus the machine baseline.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:37Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is elevated at 88.7 C versus the machine baseline.",
+        "action": "Inspect the cooling path and schedule maintenance at the earliest slot."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:38Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Temperature is drifting above the expected operating range at 84.1 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:39Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 76,
+        "summary": "Temperature is drifting above the expected operating range at 83.9 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:41Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 76,
+        "summary": "Temperature is drifting above the expected operating range at 82.6 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:43Z",
+        "machine_id": "PRESS_01",
+        "severity": "critical",
+        "risk_score": 82,
+        "summary": "Temperature is drifting above the expected operating range at 82.9 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:44Z",
+        "machine_id": "PRESS_01",
+        "severity": "warning",
+        "risk_score": 68,
+        "summary": "Temperature is drifting above the expected operating range at 82.7 C.",
+        "action": "Review motor load and electrical draw before the next production cycle."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:55Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 82,
+        "summary": "Vibration reached 3.42 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:56Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 96,
+        "summary": "Vibration reached 3.36 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:57Z",
+        "machine_id": "CNC_02",
+        "severity": "critical",
+        "risk_score": 96,
+        "summary": "Vibration reached 3.27 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:59Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 90,
+        "summary": "Vibration reached 2.10 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:55:59Z",
+        "machine_id": "CNC_02",
+        "severity": "warning",
+        "risk_score": 72,
+        "summary": "Vibration reached 2.79 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:56:00Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Vibration reached 2.84 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:56:01Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Vibration reached 3.21 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:56:03Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 80.6 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:56:04Z",
+        "machine_id": "CNC_01",
+        "severity": "critical",
+        "risk_score": 100,
+        "summary": "Temperature is drifting above the expected operating range at 81.4 C.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:56:05Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 72,
+        "summary": "Vibration reached 2.55 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:56:06Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 72,
+        "summary": "Vibration reached 2.43 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    },
+    {
+        "timestamp": "2026-04-04T15:56:08Z",
+        "machine_id": "CNC_01",
+        "severity": "warning",
+        "risk_score": 72,
+        "summary": "Vibration reached 2.09 mm/s, which may indicate bearing wear.",
+        "action": "Inspect bearings and rotating components for wear."
+    }
+]
