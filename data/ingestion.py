@@ -17,13 +17,13 @@ MACHINE_PROFILES = {
         "rpm": 1510.0,
         "current_A": 12.6,
     },
-    "PRESS_01": {
+    "PUMP_03": {
         "temperature_C": 74.0,
         "vibration_mm_s": 1.35,
         "rpm": 1385.0,
         "current_A": 13.8,
     },
-    "LATHE_01": {
+    "CONVEYOR_04": {
         "temperature_C": 69.0,
         "vibration_mm_s": 0.95,
         "rpm": 1565.0,

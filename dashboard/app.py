@@ -19,6 +19,7 @@ from auth.auth import authenticate
 from data.csv_loader import load_csv_data
 from data.ingestion import MACHINE_PROFILES, get_live_snapshot
 from data.preprocessing import FEATURE_COLUMNS, preprocess
+from data.api_client import APIClient
 from database.db import init_db, load_alerts, save_alert, save_data
 from models.isolation_forest import AnomalyModel
 from agent.decision_agent import DecisionAgent
@@ -1310,9 +1311,19 @@ def update_alert_tracking(states):
 
 
 def maybe_record_alert(state):
+    """
+    Record alert if conditions warrant and send to API if CRITICAL.
+    
+    Strategy:
+    1. Check if alert should be triggered (critical or streak threshold)
+    2. Prevent duplicate alerts with signature tracking
+    3. Save alert to local database
+    4. If CRITICAL: Send to external API for monitoring
+    """
     if not state["should_alert"]:
         return
 
+    # Create signature to avoid duplicate alerts for same condition
     signature = (
         f"{state['severity']}|{state['machine_id']}|{state['risk_score'] // 10}|"
         f"{state['summary'][:80]}"
@@ -1321,6 +1332,7 @@ def maybe_record_alert(state):
     if signature == previous:
         return
 
+    # Alert payload for local database
     alert_payload = {
         "timestamp": utc_now().isoformat(timespec="seconds").replace("+00:00", "Z"),
         "machine_id": state["machine_id"],
@@ -1329,10 +1341,28 @@ def maybe_record_alert(state):
         "summary": state["summary"],
         "action": state["action"],
     }
+    
+    # Save to local database
     save_alert(alert_payload)
     st.session_state.alert_history.insert(0, alert_payload)
     st.session_state.alert_history = st.session_state.alert_history[:50]
     st.session_state.last_alert_signature[state["machine_id"]] = signature
+    
+    # Send CRITICAL alerts to external API
+    if state["severity"] == "critical":
+        try:
+            api_client = APIClient(base_url="http://localhost:3000")
+            agent_decision = state.get("agent_decision", "CRITICAL")
+            agent_recommendation = state.get("agent_recommendation", state["summary"])
+            
+            api_client.send_alert(
+                machine_id=state["machine_id"],
+                severity="CRITICAL",
+                reason=agent_recommendation,
+                reading=state.get("current", {})
+            )
+        except Exception as e:
+            print(f"⚠️ Could not send external alert: {e}")
 
 
 def priority_frame(states):
@@ -2047,20 +2077,80 @@ def show_login():
 
 
 def advance_stream():
-    snapshot = get_live_snapshot(MACHINE_IDS)
-    for raw_reading in snapshot:
+    """
+    Advance the data stream by fetching latest readings from all machines.
+    
+    Architecture:
+    1. Try API client for real-time data via SSE
+    2. Fallback to simulated data if API unavailable
+    3. Preprocess readings
+    4. Store in session buffers
+    5. Track last seen timestamp
+    """
+    # Step 1: Initialize API client (with fallback flag)
+    api_client = APIClient(base_url="http://localhost:3000")
+    use_api = st.session_state.get("use_api", True)
+    api_healthy = api_client.health_check() if use_api else False
+    
+    if not api_healthy and use_api:
+        st.session_state.use_api = False
+        print("⚠️ API unavailable, falling back to simulated data")
+    
+    # Step 2: Get readings from either API or ingestion
+    if st.session_state.get("use_api", True) and api_healthy:
+        # Strategy: API (Real-time SSE streams)
+        readings = []
+        for machine_id in MACHINE_IDS:
+            raw_reading = api_client.get_live_stream(machine_id)
+            if raw_reading:
+                readings.append(raw_reading)
+    else:
+        # Strategy: Fallback to simulated data
+        readings = get_live_snapshot(MACHINE_IDS)
+    
+    # Step 3: Process each reading through the pipeline
+    for raw_reading in readings:
         machine_id = raw_reading["machine_id"]
+        
+        # Step 3a: Preprocess (normalize keys, handle formats)
         reading = preprocess(raw_reading)
+        
+        # Step 3b: Persist to database
         save_data(machine_id, reading)
-
+        
+        # Step 3c: Add to rolling buffer
         buffer = st.session_state.machine_buffers[machine_id]
         buffer.append(reading)
         if len(buffer) > BUFFER_SIZE:
             buffer.pop(0)
-
+        
+        # Step 3d: Track timestamp for staleness detection
         reading_timestamp = parse_timestamp(reading.get("timestamp"))
         if reading_timestamp is not None:
             st.session_state.last_seen[machine_id] = reading_timestamp
+
+
+def send_critical_alert(machine_id: str, agent_result: Dict, current_reading: Dict):
+    """
+    Send alert to API when CRITICAL decision detected.
+    
+    Args:
+        machine_id: Machine identifier
+        agent_result: Decision agent result dict with "recommendation" key
+        current_reading: Current sensor reading dict
+    """
+    try:
+        api_client = APIClient(base_url="http://localhost:3000")
+        recommendation = agent_result.get("recommendation", "Critical condition detected")
+        
+        api_client.send_alert(
+            machine_id=machine_id,
+            severity="CRITICAL",
+            reason=recommendation,
+            reading=current_reading
+        )
+    except Exception as e:
+        print(f"⚠️ Could not send alert: {e}")
 
 
 def live_monitoring_dashboard():
