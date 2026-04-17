@@ -5,6 +5,7 @@ import sys
 import time
 from datetime import datetime, timedelta, timezone
 from html import escape
+import requests
 
 
 import altair as alt
@@ -16,13 +17,56 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from auth.auth import authenticate
 from data.csv_loader import load_csv_data
-from data.ingestion import MACHINE_PROFILES, get_live_snapshot
-from data.preprocessing import FEATURE_COLUMNS, preprocess
+from data.ingestion import get_live_api_data
+from data.api_loader import get_history, get_machines, send_alert
 from database.db import init_db, load_alerts, save_alert, save_data
 from models.isolation_forest import AnomalyModel
-from data.api_loader import ApiDataLoader
+# Removed duplicate ApiDataLoader import
+
+# ========== GLOBAL CONSTANTS ==========
+FEATURE_COLUMNS = ["temperature_C", "vibration_mm_s", "rpm", "current_A"]
+
+MACHINE_IDS = ["M001", "M002", "M003", "M004"]
+
+SENSOR_LABELS = {
+    "temperature_C": "Temperature",
+    "vibration_mm_s": "Vibration", 
+    "rpm": "RPM",
+    "current_A": "Current"
+}
+
+SENSOR_UNITS = {
+    "temperature_C": "°C",
+    "vibration_mm_s": "mm/s",
+    "rpm": "RPM",
+    "current_A": "A"
+}
+
+SENSOR_THRESHOLDS = {
+    "temperature_C": {"warning_high": 80, "critical_high": 88},
+    "vibration_mm_s": {"warning_high": 1.5, "critical_high": 2.0},
+    "current_A": {"warning_high": 14, "critical_high": 16},
+    "rpm": {"warning_low": 1400, "critical_low": 1200}
+}
+
+SENSOR_TREND_THRESHOLDS = {
+    "temperature_C": 2.5,
+    "vibration_mm_s": 0.3,
+    "rpm": 50.0,
+    "current_A": 0.8
+}
+
+MACHINE_PROFILES = {
+    mid: {col: 65.0 if col == "temperature_C" else 0.8 if col == "vibration_mm_s" 
+          else 1750 if col == "rpm" else 8.5 for col in FEATURE_COLUMNS}
+    for mid in MACHINE_IDS
+}
+
+ALERT_STREAK_THRESHOLD = 3
+
 
 st.markdown("""
+
 <style>
 button[kind="header"] {display: none;}
 </style>
@@ -31,40 +75,6 @@ button[kind="header"] {display: none;}
 
 st.set_page_config(page_title="AI Predictive Maintenance", layout="wide")
 
-MACHINE_IDS = list(MACHINE_PROFILES)
-BUFFER_SIZE = 60
-TREND_WINDOW = 5
-STALE_AFTER_SECONDS = 3
-ALERT_STREAK_THRESHOLD = 2
-SENSOR_LABELS = {
-    "temperature_C": "Temperature",
-    "vibration_mm_s": "Vibration",
-    "rpm": "RPM",
-    "current_A": "Current",
-}
-SENSOR_UNITS = {
-    "temperature_C": "C",
-    "vibration_mm_s": "mm/s",
-    "rpm": "rpm",
-    "current_A": "A",
-}
-SENSOR_THRESHOLDS = {
-    "temperature_C": {"warning_high": 85.0, "critical_high": 95.0},
-    "vibration_mm_s": {"warning_high": 2.0, "critical_high": 3.0},
-    "current_A": {"warning_high": 16.0, "critical_high": 18.0},
-    "rpm": {
-        "warning_high": 1600.0,
-        "critical_high": 1700.0,
-        "warning_low": 1350.0,
-        "critical_low": 1250.0,
-    },
-}
-SENSOR_TREND_THRESHOLDS = {
-    "temperature_C": 3.0,
-    "vibration_mm_s": 0.25,
-    "current_A": 1.0,
-    "rpm": 60.0,
-}
 
 
 def utc_now():
@@ -836,7 +846,7 @@ def sensor_trend_threshold(sensor_name, series):
     return max(variation * 0.9, 0.5)
 
 
-def detect_sensor_trend(df, sensor_name, window=TREND_WINDOW):
+def detect_sensor_trend(df, sensor_name, window=5):
     if sensor_name not in df.columns:
         return "collecting", None, None
 
@@ -1050,16 +1060,151 @@ def init_session_state():
     if "alert_history" not in st.session_state:
         st.session_state.alert_history = load_alerts()
 
+BUFFER_SIZE = 60
+TREND_WINDOW = 5
+STALE_AFTER_SECONDS = 3
+
+# ========== MISSING FUNCTIONS ==========
+def preprocess(raw_data):
+    """Normalize raw sensor reading to standard format."""
+    if not isinstance(raw_data, dict):
+        return {}
+    
+    result = {}
+    
+    # Standardize timestamp
+    ts = raw_data.get("timestamp") or raw_data.get("time")
+    if ts:
+        result["timestamp"] = ts
+    
+    # Standardize status
+    status = raw_data.get("status", "running")
+    result["status"] = status
+    
+    # Normalize sensor values with fallbacks
+    for col in FEATURE_COLUMNS:
+        value = raw_data.get(col) or raw_data.get(col.replace("_", ""), 0.0)
+        result[col] = float(value) if value is not None else 0.0
+    
+    # machine_id fallback
+    result["machine_id"] = raw_data.get("machine_id", MACHINE_IDS[0])
+    
+    return result
+
 
 def reset_live_state():
-    st.session_state.machine_buffers = {machine_id: [] for machine_id in MACHINE_IDS}
+    """Reset all live monitoring session state."""
+    st.session_state.machine_buffers = {mid: [] for mid in MACHINE_IDS}
     st.session_state.last_seen = {}
-    st.session_state.risk_streaks = {machine_id: 0 for machine_id in MACHINE_IDS}
+    st.session_state.risk_streaks = {mid: 0 for mid in MACHINE_IDS}
+    st.session_state.streams = {}
     st.session_state.last_alert_signature = {}
-    st.session_state.alert_history = load_alerts()
+
+
+@st.cache_resource(show_spinner=False)
+def get_baselines_and_model():
+    """Cached baselines and model loading."""
+    csv_path = "data/sample_data.csv"
+    baselines = build_baselines(csv_path)
+    model = load_model(csv_path)
+    return baselines, model
+
+
+def live_monitoring_dashboard():
+    """Live monitoring dashboard implementation."""
+    # Load cached resources
+    baselines, model = get_baselines_and_model()
+    
+    # Sidebar controls
+    st.sidebar.header("Monitoring control")
+    auto_refresh = st.sidebar.toggle("Auto refresh", value=True)
+    refresh_interval = st.sidebar.slider("Refresh interval (seconds)", 1, 5, 1)
+    focus_machine = st.sidebar.selectbox("Focus machine", MACHINE_IDS)
+    
+    st.sidebar.caption("4 machines, per-machine baselines, risk prioritization, alert history, stream-gap detection.")
+    
+    if st.sidebar.button("Reset live buffers"):
+        reset_live_state()
+        st.rerun()
+    
+    # Advance streams
+    should_advance = auto_refresh or st.sidebar.button("Advance one cycle")
+    if should_advance:
+        advance_stream()
+    
+    # Build states
+    states = []
+    for machine_id in MACHINE_IDS:
+        df = pd.DataFrame(st.session_state.machine_buffers[machine_id])
+        states.append(build_machine_state(machine_id, df, baselines[machine_id], model))
+    
+    update_alert_tracking(states)
+    for state in states:
+        maybe_record_alert(state)
+    
+    # Sort and metrics
+    states.sort(key=lambda item: item["risk_score"], reverse=True)
+    highest = states[0]
+    active_alerts = sum(1 for state in states if state["should_alert"])
+    stream_gaps = sum(1 for state in states if state["stale_seconds"] is not None and state["stale_seconds"] > STALE_AFTER_SECONDS)
+    
+    top_metrics = st.columns(4)
+    top_metrics[0].metric("Machines monitored", len(MACHINE_IDS))
+    top_metrics[1].metric("Active alerts", active_alerts)
+    top_metrics[2].metric("Highest risk", f"{highest['machine_id']} ({highest['risk_score']})")
+    top_metrics[3].metric("Stream gaps", stream_gaps)
+    
+    render_summary_card(
+        f"Priority target: {highest['machine_id']}",
+        f"{highest['summary']} | Action: {highest['action']}"
+    )
+    
+    # Layout
+    board_col, focus_col = st.columns([1.35, 1])
+    
+    with board_col:
+        st.subheader("Priority queue")
+        st.dataframe(priority_frame(states), use_container_width=True, hide_index=True)
+        
+        st.subheader("Machine overview")
+        card_columns = st.columns(2)
+        for index, state in enumerate(states):
+            with card_columns[index % 2]:
+                render_machine_card(state)
+    
+    with focus_col:
+        focus_state = next(s for s in states if s["machine_id"] == focus_machine)
+        focus_df = pd.DataFrame(st.session_state.machine_buffers[focus_machine])
+        
+        st.subheader(f"Focus: {focus_machine}")
+        render_reason_card("Explanation", focus_state["reasons"] or [focus_state["summary"]])
+        render_reason_card("Action", [focus_state["action"], focus_state["forecast_text"]])
+        
+        if not focus_df.empty:
+            chart_df = focus_df.rename(columns=SENSOR_LABELS)
+            st.line_chart(
+                chart_df[[SENSOR_LABELS[col] for col in FEATURE_COLUMNS]],
+                height=320, use_container_width=True
+            )
+            st.caption("Live samples")
+            st.dataframe(baseline_frame(focus_machine, focus_state, baselines), use_container_width=True)
+        else:
+            st.info("Waiting for live data")
+    
+    # Alerts
+    st.subheader("Alert history")
+    if st.session_state.alert_history:
+        st.dataframe(pd.DataFrame(st.session_state.alert_history), use_container_width=True)
+    else:
+        st.info("No alerts")
+    
+    if auto_refresh:
+        time.sleep(refresh_interval)
+        st.rerun()
 
 
 def get_trend_change(df, sensor="temperature_C", window=TREND_WINDOW):
+
     if sensor not in df.columns or len(df) < window:
         return None
     return float(df[sensor].iloc[-1] - df[sensor].iloc[-window])
@@ -1299,6 +1444,7 @@ def maybe_record_alert(state):
         "action": state["action"],
     }
     save_alert(alert_payload)
+    send_alert(state["machine_id"], alert_payload)
     st.session_state.alert_history.insert(0, alert_payload)
     st.session_state.alert_history = st.session_state.alert_history[:50]
     st.session_state.last_alert_signature[state["machine_id"]] = signature
@@ -1716,13 +1862,9 @@ def historical_analysis_dashboard():
         chart = build_sensor_chart(filtered_df, sensor_name, prediction_df)
         st.altair_chart(chart, use_container_width=True)
 
-
-
-# ✅ MUST be the very first Streamlit call — never inside a function
-st.set_page_config(layout="wide", page_title="Smart Site System")
-
 # ---------- SESSION STATE DEFAULTS ----------
 if "users" not in st.session_state:
+
     st.session_state.users = {}          # {email: {name, password}}
 
 if "mode" not in st.session_state:
@@ -1879,8 +2021,7 @@ def show_signup():
         st.markdown("""
         <h1 style="color:white; margin-bottom:4px;">Create Account</h1>
         <p style="color:#9ca3af; margin-bottom:24px;">
-            Welcome to the Smart Site System for Oil Depots.<br>
-            Register as a member to get started.
+            Welcome to the AI-powered Predictive Maintenance Agent
         </p>
         """, unsafe_allow_html=True)
 
@@ -1967,124 +2108,39 @@ def show_login():
 
 
 def advance_stream():
-    snapshot = get_live_snapshot(MACHINE_IDS)
-    for raw_reading in snapshot:
-        machine_id = raw_reading["machine_id"]
+    for machine_id in MACHINE_IDS:
+
+        # create stream if not exists
+        if "streams" not in st.session_state:
+            st.session_state.streams = {}
+
+        if machine_id not in st.session_state.streams:
+            st.session_state.streams[machine_id] = get_live_api_data(machine_id)
+
+        # get one reading
+        try:
+            raw_reading = next(st.session_state.streams[machine_id])
+        except:
+            continue
+
         reading = preprocess(raw_reading)
+
         save_data(machine_id, reading)
 
         buffer = st.session_state.machine_buffers[machine_id]
         buffer.append(reading)
+
         if len(buffer) > BUFFER_SIZE:
             buffer.pop(0)
 
         reading_timestamp = parse_timestamp(reading.get("timestamp"))
-        if reading_timestamp is not None:
+        if reading_timestamp:
             st.session_state.last_seen[machine_id] = reading_timestamp
 
-
-def live_monitoring_dashboard():
-    baselines = build_baselines("data/sample_data.csv")
-    model = load_model("data/sample_data.csv")
-
-    render_workspace_header(
-        "Live monitoring",
-        "Predictive Maintenance Command Center",
-        "Track live machine telemetry, surface rising thermal risk early, and act on machine-level explanations before a fault escalates.",
-        "Live stream connected",
-    )
-    render_hero()
-
-    st.sidebar.header("Monitoring control")
-    auto_refresh = st.sidebar.toggle("Auto refresh", value=True)
-    refresh_interval = st.sidebar.slider("Refresh interval (seconds)", 1, 5, 1)
-    focus_machine = st.sidebar.selectbox("Focus machine", MACHINE_IDS)
-    st.sidebar.caption(
-        "This dashboard now aligns more closely with the statement: 4 machines, per-machine baselines, "
-        "risk prioritization, alert history, and stream-gap detection."
-    )
-
-    if st.sidebar.button("Reset live buffers"):
-        reset_live_state()
-        st.rerun()
-
-    should_advance = auto_refresh or not any(st.session_state.machine_buffers.values()) or st.sidebar.button("Advance one cycle")
-    if should_advance:
-        advance_stream()
-
-    states = []
-    for machine_id in MACHINE_IDS:
-        df = pd.DataFrame(st.session_state.machine_buffers[machine_id])
-        states.append(build_machine_state(machine_id, df, baselines[machine_id], model))
-
-    update_alert_tracking(states)
-    for state in states:
-        maybe_record_alert(state)
-
-    states.sort(key=lambda item: item["risk_score"], reverse=True)
-    highest = states[0]
-    active_alerts = sum(1 for state in states if state["should_alert"])
-    stream_gaps = sum(1 for state in states if state["stale_seconds"] is not None and state["stale_seconds"] > STALE_AFTER_SECONDS)
-
-    top_metrics = st.columns(4)
-    top_metrics[0].metric("Machines monitored", len(MACHINE_IDS))
-    top_metrics[1].metric("Active alerts", active_alerts)
-    top_metrics[2].metric("Highest risk", f"{highest['machine_id']} ({highest['risk_score']})")
-    top_metrics[3].metric("Stream gaps", stream_gaps)
-
-    render_summary_card(
-        f"Priority target: {highest['machine_id']}",
-        f"{highest['summary']} Recommended action: {highest['action']}",
-    )
-
-    board_col, focus_col = st.columns([1.35, 1])
-
-    with board_col:
-        st.subheader("Priority queue")
-        st.dataframe(priority_frame(states), use_container_width=True, hide_index=True)
-
-        st.subheader("Machine overview")
-        card_columns = st.columns(2)
-        for index, state in enumerate(states):
-            with card_columns[index % 2]:
-                render_machine_card(state)
-
-    with focus_col:
-        focus_state = next(state for state in states if state["machine_id"] == focus_machine)
-        focus_df = pd.DataFrame(st.session_state.machine_buffers[focus_machine])
-
-        st.subheader(f"Focus view: {focus_machine}")
-        render_reason_card(
-            "Decision explanation",
-            focus_state["reasons"] or [focus_state["summary"]],
-        )
-        render_reason_card(
-            "Recommended action",
-            [focus_state["action"], focus_state["forecast_text"]],
-        )
-
-        if not focus_df.empty:
-            chart_df = focus_df.rename(columns=SENSOR_LABELS)
-            st.line_chart(
-                chart_df[[SENSOR_LABELS[column] for column in FEATURE_COLUMNS]],
-                height=320,
-                use_container_width=True,
-            )
-            st.caption("Rolling window of the latest live samples for the selected machine.")
-            st.dataframe(baseline_frame(focus_machine, focus_state, baselines), use_container_width=True, hide_index=True)
-        else:
-            st.info("Waiting for the first live packet for this machine.")
-
-    st.subheader("Alert history")
-    if st.session_state.alert_history:
-        alert_df = pd.DataFrame(st.session_state.alert_history)
-        st.dataframe(alert_df, use_container_width=True, hide_index=True)
-    else:
-        st.info("No alerts recorded yet.")
-
-    if auto_refresh:
-        time.sleep(refresh_interval)
-        st.rerun()
+def show_dashboard():
+    """Legacy dashboard - redirect to live_monitoring_dashboard."""
+    st.warning("Redirecting to new live monitoring dashboard...")
+    live_monitoring_dashboard()
 
 
 def main_app():

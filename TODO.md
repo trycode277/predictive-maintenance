@@ -1,16 +1,2 @@
-# API Data Source Integration for Dashboard
-Track progress on adding external API option for live machine data.
-
-## Completed Steps:
-- [x] 1. Update requirements.txt (add requests)
-- [x] 2. Create data/api_loader.py (API fetcher class)
-- [x] 3. Edit dashboard/app.py (add UI config, integrate loader)
-
-## Pending Steps:
-- [ ] 4. Test installation & deps
-- [ ] 5. Test local sim vs API toggle
-- [ ] 6. Verify data flow (fetch -> preprocess -> buffers -> charts)
-- [ ] 7. Mark complete & attempt_completion
-
-**Current step:** 4/7
+# AI Predictive Maintenance Integration TODO ✅\n\n## Approved Plan Steps (External API Integration)\n\n### 1. ✅ Create TODO.md\n### 2. ✅ Update data/api_loader.py: Add send_alert POST function, remove duplicate ApiDataLoader class\n### 3. ✅ Update dashboard/app.py: Import send_alert, integrate into maybe_record_alert (now calls send_alert after save_alert)\n### 4. [ ] Test integration: Verify live monitoring → anomaly → local save + POST to /alerts\n### 5. ✅ Update TODO.md with completion status\n### 6. [ ] Attempt completion\n\n**Status**: Core edits complete. Test with `streamlit run dashboard/app.py` (requires server at localhost:3000).\n\nIntegration fully matches task: GET/SSE for data, preprocess→ML→alerts→POST.
 
