@@ -1,14 +1,17 @@
 import json
 import base64
+import re
 import os
 import sys
 import time
 from datetime import datetime, timedelta, timezone
 from html import escape
 
+
 import altair as alt
 import pandas as pd
 import streamlit as st
+import base64
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -19,6 +22,12 @@ from data.preprocessing import FEATURE_COLUMNS, preprocess
 from database.db import init_db, load_alerts, save_alert, save_data
 from models.isolation_forest import AnomalyModel
 from agent.decision_agent import DecisionAgent
+
+st.markdown("""
+<style>
+button[kind="header"] {display: none;}
+</style>
+""", unsafe_allow_html=True)
 
 
 st.set_page_config(page_title="AI Predictive Maintenance", layout="wide")
@@ -1835,7 +1844,9 @@ def safe_get_base64(path: str) -> str:
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-IMG_PATH = os.path.join(BASE_DIR, "assets", "login.jpg")
+
+IMG_PATH = os.path.join(BASE_DIR, "assets", "loginn.jpg")
+
 img_base64 = safe_get_base64(IMG_PATH)
 
 
@@ -2005,6 +2016,7 @@ def show_login():
         st.markdown("""
         <h1 style="color:white; margin-bottom:4px;">Welcome Back</h1>
         <p style="color:#9ca3af; margin-bottom:24px;">
+
             Sign in to access the Predictive Maintenance System.
         </p>
         """, unsafe_allow_html=True)
@@ -2028,6 +2040,9 @@ def show_login():
         st.markdown("<p style='color:#9ca3af; margin-top:16px;'>Default login: admin / admin123</p>", unsafe_allow_html=True)
 
     page_layout(form)
+
+
+
 
 
 
@@ -2172,6 +2187,8 @@ def main_app():
         historical_analysis_dashboard()
     else:
         live_monitoring_dashboard()
+
+
 
 
 
