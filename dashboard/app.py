@@ -1,4 +1,5 @@
 import json
+import re
 import os
 import sys
 import time
@@ -8,6 +9,7 @@ from html import escape
 import altair as alt
 import pandas as pd
 import streamlit as st
+import base64
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -17,6 +19,12 @@ from data.ingestion import MACHINE_PROFILES, get_live_snapshot
 from data.preprocessing import FEATURE_COLUMNS, preprocess
 from database.db import init_db, load_alerts, save_alert, save_data
 from models.isolation_forest import AnomalyModel
+
+st.markdown("""
+<style>
+button[kind="header"] {display: none;}
+</style>
+""", unsafe_allow_html=True)
 
 
 st.set_page_config(page_title="AI Predictive Maintenance", layout="wide")
@@ -1707,77 +1715,276 @@ def historical_analysis_dashboard():
         st.altair_chart(chart, use_container_width=True)
 
 
-def login():
-    st.markdown(
-        """
-        <style>
-        section[data-testid="stSidebar"], div[data-testid="collapsedControl"] {
-            display: none;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
-    outer_left, shell_col, outer_right = st.columns([0.9, 1.22, 0.9], gap="large")
-    del outer_left, outer_right
 
-    with shell_col:
-        toggle_spacer, toggle_col = st.columns([0.72, 0.28], gap="small")
-        with toggle_spacer:
-            st.empty()
-        with toggle_col:
-            st.toggle("Dark theme", key="theme_toggle", help="Switch between dark and light workspace styles.")
+# ✅ MUST be the very first Streamlit call — never inside a function
+st.set_page_config(layout="wide", page_title="Smart Site System")
 
+# ---------- SESSION STATE DEFAULTS ----------
+if "users" not in st.session_state:
+    st.session_state.users = {}          # {email: {name, password}}
+
+if "mode" not in st.session_state:
+    st.session_state.mode = "signup"
+
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
+
+# ---------- PASSWORD STRENGTH ----------
+def password_strength(password: str) -> int:
+    score = 0
+    if len(password) >= 8:
+        score += 1
+    if re.search(r"[A-Z]", password):
+        score += 1
+    if re.search(r"[0-9]", password):
+        score += 1
+    if re.search(r"[@#$%^&+=]", password):
+        score += 1
+    return score
+
+
+def show_strength(password: str) -> int:
+    score = password_strength(password)
+    if score <= 1:
+        st.error("🔴 Weak password — needs uppercase, number & special char (@#$%^&+=)")
+    elif score == 2:
+        st.warning("🟡 Medium password — add more complexity")
+    elif score == 3:
+        st.info("🔵 Good password")
+    else:
+        st.success("🟢 Strong password")
+    return score
+
+
+# ---------- IMAGE LOADER ----------
+def safe_get_base64(path: str) -> str:
+    if os.path.exists(path):
+        with open(path, "rb") as f:
+            return base64.b64encode(f.read()).decode()
+    return ""
+
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+IMG_PATH = os.path.join(BASE_DIR, "assets", "loginn.jpg")
+img_base64 = safe_get_base64(IMG_PATH)
+
+
+# ---------- GLOBAL STYLES ----------
+st.markdown("""
+<style>
+
+/* Hide sidebar */
+section[data-testid="stSidebar"],
+div[data-testid="collapsedControl"] {
+    display: none;
+}
+
+.block-container {
+    padding: 0rem;
+}
+
+
+
+/* INPUT */
+.stTextInput input {
+    background-color: rgba(31,41,55,0.8) !important;
+    color: white !important;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    height: 45px;
+}
+
+/* LABEL */
+.stTextInput label {
+    color: #d1d5db !important;
+}
+
+/* BUTTON */
+.stButton > button {
+    background-color: #2563eb;
+    color: white;
+    border-radius: 8px;
+    width: 100%;
+    height: 45px;
+    margin-top: 8px;
+    border: none;
+    font-weight: 600;
+}
+
+/* HOVER */
+.stButton > button:hover {
+    background-color: #1d4ed8;
+}
+
+/* CHECKBOX */
+.stCheckbox label {
+    color: #9ca3af !important;
+}
+
+/* SECONDARY BUTTON */
+div[data-testid="stButton"]:last-of-type button {
+    background-color: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #9ca3af;
+}
+div[data-testid="stButton"]:last-of-type button:hover {
+    background-color: rgba(255,255,255,0.05);
+    color: white;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+
+# ---------- MAIN ROUTER ----------
+def main():
+    if st.session_state.logged_in:
+        show_dashboard()
+    elif st.session_state.mode == "signup":
+        show_signup()
+    else:
+        show_login()
+
+
+# ---------- LAYOUT WRAPPER ----------
+def page_layout(form_fn):
+    """Renders the split left-image / right-form layout."""
+    left, right = st.columns([1.6, 1])
+
+    with left:
+        bg = (
+            f"url('data:image/jpeg;base64,{img_base64}')"
+            if img_base64
+            else "linear-gradient(135deg,#0f172a,#020617)"
+        )
         st.markdown(
-            """
-            <div class="topbar-card login-shell-card">
-                <div class="shell-chip">Secure access</div>
-                <div class="shell-title">AI Predictive Maintenance</div>
-                <div class="shell-subtitle">
-                    Sign in to continue monitoring live machines, analyzing recorded telemetry, and acting on trend-based alerts from one control center.
-                </div>
-            </div>
+            f"""
+            <div style="
+                height: 100vh;
+                background: {bg};
+                background-size: cover;
+                background-position: center;
+            "></div>
             """,
             unsafe_allow_html=True,
         )
 
-        inner_left, center_col, inner_right = st.columns([0.16, 0.68, 0.16], gap="small")
-        del inner_left, inner_right
+    with right:
+        st.markdown('<div class="right-panel">', unsafe_allow_html=True)
+        form_fn()
+        st.markdown("</div>", unsafe_allow_html=True)
 
-    with center_col:
-        st.markdown(
-            """
-            <div class="login-copy-card">
-                <div class="login-kicker">Operations sign in</div>
-                <div class="login-title">Login</div>
-                <div class="login-copy">
-                    Access the live command center, historical analytics, forecasting panels, and alert history from one premium workspace.
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
 
-        with st.form("login_form"):
-            username = st.text_input("Username", placeholder="Enter your username")
-            password = st.text_input("Password", type="password", placeholder="Enter your password")
-            submitted = st.form_submit_button("Log in")
+# ---------- SIGNUP PAGE ----------
+def show_signup():
+    def form():
+        st.markdown("""
+        <h1 style="color:white; margin-bottom:4px;">Create Account</h1>
+        <p style="color:#9ca3af; margin-bottom:24px;">
+            Welcome to the Smart Site System for Oil Depots.<br>
+            Register as a member to get started.
+        </p>
+        """, unsafe_allow_html=True)
 
-        st.markdown(
-            """
-            <div class="auth-note">
-                Use your operator credentials to continue. Once signed in, you can switch between Live Monitoring and Historical Analysis from the left navigation.
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+        username = st.text_input("User Name", key="su_username")
+        email    = st.text_input("E-mail", key="su_email")
+        password = st.text_input("Password", type="password", key="su_password")
 
-        if submitted:
-            if authenticate(username, password):
-                st.session_state.logged_in = True
-                st.rerun()
+        # Always evaluate strength so confirm field is always present when needed
+        strength = 0
+        if password:
+            strength = show_strength(password)
+
+        # Show confirm field only when password is strong enough
+        confirm = ""
+        if password and strength >= 3:
+            confirm = st.text_input("Re-enter Password", type="password", key="su_confirm")
+
+        agree = st.checkbox("I agree to the terms of service", key="su_agree")
+
+        if st.button("Create Account", key="btn_create"):
+            # --- Validation ---
+            if not username.strip() or not email.strip() or not password:
+                st.warning("⚠️ Please fill in all fields.")
+            elif not re.match(r"^[\w\.-]+@[\w\.-]+\.\w+$", email):
+                st.error("❌ Enter a valid email address.")
+            elif email in st.session_state.users:
+                st.error("❌ An account with this email already exists.")
+            elif strength < 3:
+                st.error("❌ Password is too weak. Improve it before continuing.")
+            elif confirm != password:
+                st.error("❌ Passwords do not match.")
+            elif not agree:
+                st.warning("⚠️ You must accept the terms of service.")
             else:
-                st.error("Invalid credentials")
+                st.session_state.users[email] = {
+                    "name": username.strip(),
+                    "password": password,
+                }
+                st.success("🎉 Account created! Redirecting to login…")
+                st.session_state.mode = "login"
+                st.rerun()
+
+        st.markdown("<p style='color:#9ca3af; margin-top:16px;'>Already have an account?</p>", unsafe_allow_html=True)
+        if st.button("Go to Login", key="btn_go_login"):
+            st.session_state.mode = "login"
+            st.rerun()
+
+    page_layout(form)
+
+
+# ---------- LOGIN PAGE ----------
+def show_login():
+    def form():
+        st.markdown("""
+        <h1 style="color:white; margin-bottom:4px;">Welcome Back</h1>
+        <p style="color:#9ca3af; margin-bottom:24px;">
+            Sign in to access the Smart Site System.
+        </p>
+        """, unsafe_allow_html=True)
+
+        email    = st.text_input("Email", key="li_email")
+        password = st.text_input("Password", type="password", key="li_password")
+
+        if st.button("Login", key="btn_login"):
+            if not email.strip() or not password:
+                st.warning("⚠️ Please enter both email and password.")
+            else:
+                user = st.session_state.users.get(email.strip())
+                if user and user["password"] == password:
+                    st.session_state.logged_in = True
+                    st.session_state.current_user = user["name"]
+                    st.success(f"✅ Welcome back, {user['name']}!")
+                    st.rerun()
+                else:
+                    st.error("❌ Invalid email or password.")
+
+        st.markdown("<p style='color:#9ca3af; margin-top:16px;'>Don't have an account?</p>", unsafe_allow_html=True)
+        if st.button("Go to Signup", key="btn_go_signup"):
+            st.session_state.mode = "signup"
+            st.rerun()
+
+    page_layout(form)
+
+
+# ---------- POST-LOGIN DASHBOARD ----------
+def show_dashboard():
+    name = st.session_state.get("current_user", "User")
+    st.title(f"🛢️ Smart Site System — Oil Depot")
+    st.success(f"Logged in as **{name}**")
+    st.info("Dashboard content goes here.")
+
+    if st.button("Logout"):
+        st.session_state.logged_in = False
+        st.session_state.mode = "login"
+        st.session_state.pop("current_user", None)
+        st.rerun()
+
+
+# ---------- ENTRY POINT ----------
+if __name__ == "__main__" or True:
+    main()
+
 
 
 def advance_stream():
