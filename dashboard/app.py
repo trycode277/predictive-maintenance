@@ -1,4 +1,5 @@
 import json
+import base64
 import os
 import sys
 import time
@@ -17,6 +18,7 @@ from data.ingestion import MACHINE_PROFILES, get_live_snapshot
 from data.preprocessing import FEATURE_COLUMNS, preprocess
 from database.db import init_db, load_alerts, save_alert, save_data
 from models.isolation_forest import AnomalyModel
+from agent.decision_agent import DecisionAgent
 
 
 st.set_page_config(page_title="AI Predictive Maintenance", layout="wide")
@@ -702,6 +704,14 @@ def load_model(path):
     return model
 
 
+@st.cache_resource(show_spinner=False)
+def load_agent(path):
+    """Initialize the Decision Agent with the trained model"""
+    model = load_model(path)
+    agent = DecisionAgent(model)
+    return agent
+
+
 @st.cache_data(show_spinner=False)
 def load_recorded_sensor_frame(path, modified_at):
     del modified_at
@@ -1113,7 +1123,7 @@ def recommended_action(current, future_temperature, stale_seconds):
     return "Continue monitoring and watch for repeated warning patterns."
 
 
-def build_machine_state(machine_id, df, baseline, model):
+def build_machine_state(machine_id, df, baseline, model, agent=None):
     last_seen = st.session_state.last_seen.get(machine_id)
     current = df.iloc[-1].to_dict() if not df.empty else {}
     stale_seconds = None
@@ -1127,6 +1137,22 @@ def build_machine_state(machine_id, df, baseline, model):
     risk_score = 0.0
     reasons = []
     z_scores = {}
+    
+    # Agent analysis (if available)
+    agent_result = None
+    agent_decision = "NORMAL"
+    agent_recommendation = "Machine operating normally."
+    agent_action = "CONTINUE_NORMAL"
+    
+    if agent is not None and current:
+        try:
+            agent_result = agent.analyze(current, machine_id=machine_id)
+            agent_decision = agent_result.get("decision", "NORMAL")
+            agent_recommendation = agent_result.get("recommendation", "")
+            agent_action = agent_result.get("action", "CONTINUE_NORMAL")
+        except Exception as e:
+            # Fallback if agent analysis fails
+            pass
 
     if df.empty:
         return {
@@ -1147,6 +1173,9 @@ def build_machine_state(machine_id, df, baseline, model):
             "stale_seconds": None,
             "last_seen_text": "No data yet",
             "action": "Verify the stream source for this machine.",
+            "agent_decision": "OFFLINE",
+            "agent_recommendation": "Waiting for data connection.",
+            "agent_action": "WAIT_FOR_DATA",
         }
 
     for column in FEATURE_COLUMNS:
@@ -1250,6 +1279,9 @@ def build_machine_state(machine_id, df, baseline, model):
         "stale_seconds": stale_seconds,
         "last_seen_text": current.get("timestamp", "Unknown"),
         "action": recommended_action(current, future_temperature, stale_seconds),
+        "agent_decision": agent_decision,
+        "agent_recommendation": agent_recommendation,
+        "agent_action": agent_action,
     }
 
 
@@ -1303,12 +1335,12 @@ def priority_frame(states):
                 "Machine": state["machine_id"],
                 "Risk": state["risk_score"],
                 "Severity": state["severity"].title(),
+                "Agent": state.get("agent_decision", "NORMAL"),
                 "Status": str(state["status"]).replace("_", " ").title(),
                 "Temperature (C)": round(float(current.get("temperature_C", 0.0)), 1),
                 "Vibration (mm/s)": round(float(current.get("vibration_mm_s", 0.0)), 2),
                 "Current (A)": round(float(current.get("current_A", 0.0)), 2),
                 "Trend": format_trend(state["trend"], state["trend_change"]),
-                "Forecast": state["forecast_text"],
             }
         )
 
@@ -1472,6 +1504,47 @@ def render_reason_card(title, items):
         <div class="reason-card">
             <div class="reason-title">{escape(title)}</div>
             {body}
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_agent_insights(state):
+    """
+    Display AI Agent Decision Insights
+    """
+    decision = state.get("agent_decision", "NORMAL")
+    recommendation = state.get("agent_recommendation", "")
+    action = state.get("agent_action", "CONTINUE_NORMAL")
+    
+    # Color coding for decisions
+    decision_colors = {
+        "CRITICAL": "#ff8c7b",
+        "WARNING": "#f4c152",
+        "WATCH": "#66dbff",
+        "NORMAL": "#4fdb96",
+        "OFFLINE": "#97a6c5",
+    }
+    
+    decision_color = decision_colors.get(decision, "#97a6c5")
+    
+    st.markdown(
+        f"""
+        <div class="reason-card" style="border-left: 6px solid {decision_color};">
+            <div class="reason-title">🤖 AI Agent Decision</div>
+            <div style="margin-bottom: 0.8rem;">
+                <div style="color: #97a6c5; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 0.15rem;">Decision Level</div>
+                <div style="color: {decision_color}; font-size: 1.1rem; font-weight: 700;">{decision}</div>
+            </div>
+            <div style="margin-bottom: 0.8rem;">
+                <div style="color: #97a6c5; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 0.15rem;">Recommendation</div>
+                <div style="color: #f5f7fb; line-height: 1.55;">{escape(recommendation)}</div>
+            </div>
+            <div>
+                <div style="color: #97a6c5; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 0.15rem;">Automatic Action</div>
+                <div style="color: #90a4ff; font-weight: 700;">{action.replace('_', ' ')}</div>
+            </div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -1707,77 +1780,255 @@ def historical_analysis_dashboard():
         st.altair_chart(chart, use_container_width=True)
 
 
-def login():
-    st.markdown(
-        """
-        <style>
-        section[data-testid="stSidebar"], div[data-testid="collapsedControl"] {
-            display: none;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
-    outer_left, shell_col, outer_right = st.columns([0.9, 1.22, 0.9], gap="large")
-    del outer_left, outer_right
+# ✅ MUST be the very first Streamlit call — never inside a function
+st.set_page_config(layout="wide", page_title="Smart Site System")
 
-    with shell_col:
-        toggle_spacer, toggle_col = st.columns([0.72, 0.28], gap="small")
-        with toggle_spacer:
-            st.empty()
-        with toggle_col:
-            st.toggle("Dark theme", key="theme_toggle", help="Switch between dark and light workspace styles.")
+# ---------- SESSION STATE DEFAULTS ----------
+if "users" not in st.session_state:
+    # Load users from JSON file
+    try:
+        with open("database/users.json", "r") as f:
+            users_list = json.load(f)
+            st.session_state.users = {user["username"]: user for user in users_list}
+    except:
+        st.session_state.users = {}
 
+if "mode" not in st.session_state:
+    st.session_state.mode = "login"
+
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
+
+# ---------- PASSWORD STRENGTH ----------
+def password_strength(password: str) -> int:
+    score = 0
+    if len(password) >= 8:
+        score += 1
+    if re.search(r"[A-Z]", password):
+        score += 1
+    if re.search(r"[0-9]", password):
+        score += 1
+    if re.search(r"[@#$%^&+=]", password):
+        score += 1
+    return score
+
+
+def show_strength(password: str) -> int:
+    score = password_strength(password)
+    if score <= 1:
+        st.error("🔴 Weak password — needs uppercase, number & special char (@#$%^&+=)")
+    elif score == 2:
+        st.warning("🟡 Medium password — add more complexity")
+    elif score == 3:
+        st.info("🔵 Good password")
+    else:
+        st.success("🟢 Strong password")
+    return score
+
+
+# ---------- IMAGE LOADER ----------
+def safe_get_base64(path: str) -> str:
+    if os.path.exists(path):
+        with open(path, "rb") as f:
+            return base64.b64encode(f.read()).decode()
+    return ""
+
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+IMG_PATH = os.path.join(BASE_DIR, "assets", "login.jpg")
+img_base64 = safe_get_base64(IMG_PATH)
+
+
+# ---------- GLOBAL STYLES ----------
+st.markdown("""
+<style>
+
+
+
+.block-container {
+    padding: 0rem;
+}
+
+
+
+/* INPUT */
+.stTextInput input {
+    background-color: rgba(31,41,55,0.8) !important;
+    color: white !important;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    height: 45px;
+}
+
+/* LABEL */
+.stTextInput label {
+    color: #d1d5db !important;
+}
+
+/* BUTTON */
+.stButton > button {
+    background-color: #2563eb;
+    color: white;
+    border-radius: 8px;
+    width: 100%;
+    height: 45px;
+    margin-top: 8px;
+    border: none;
+    font-weight: 600;
+}
+
+/* HOVER */
+.stButton > button:hover {
+    background-color: #1d4ed8;
+}
+
+/* CHECKBOX */
+.stCheckbox label {
+    color: #9ca3af !important;
+}
+
+/* SECONDARY BUTTON */
+div[data-testid="stButton"]:last-of-type button {
+    background-color: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #9ca3af;
+}
+div[data-testid="stButton"]:last-of-type button:hover {
+    background-color: rgba(255,255,255,0.05);
+    color: white;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+
+# ---------- MAIN ROUTER ----------
+def main():
+    if st.session_state.logged_in:
+        show_dashboard()
+    elif st.session_state.mode == "signup":
+        show_signup()
+    else:
+        show_login()
+
+
+# ---------- LAYOUT WRAPPER ----------
+def page_layout(form_fn):
+    """Renders the split left-image / right-form layout."""
+    left, right = st.columns([1.6, 1])
+
+    with left:
+        bg = (
+            f"url('data:image/jpeg;base64,{img_base64}')"
+            if img_base64
+            else "linear-gradient(135deg,#0f172a,#020617)"
+        )
         st.markdown(
-            """
-            <div class="topbar-card login-shell-card">
-                <div class="shell-chip">Secure access</div>
-                <div class="shell-title">AI Predictive Maintenance</div>
-                <div class="shell-subtitle">
-                    Sign in to continue monitoring live machines, analyzing recorded telemetry, and acting on trend-based alerts from one control center.
-                </div>
-            </div>
+            f"""
+            <div style="
+                height: 100vh;
+                background: {bg};
+                background-size: cover;
+                background-position: center;
+            "></div>
             """,
             unsafe_allow_html=True,
         )
 
-        inner_left, center_col, inner_right = st.columns([0.16, 0.68, 0.16], gap="small")
-        del inner_left, inner_right
+    with right:
+        st.markdown('<div class="right-panel">', unsafe_allow_html=True)
+        form_fn()
+        st.markdown("</div>", unsafe_allow_html=True)
 
-    with center_col:
-        st.markdown(
-            """
-            <div class="login-copy-card">
-                <div class="login-kicker">Operations sign in</div>
-                <div class="login-title">Login</div>
-                <div class="login-copy">
-                    Access the live command center, historical analytics, forecasting panels, and alert history from one premium workspace.
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
 
-        with st.form("login_form"):
-            username = st.text_input("Username", placeholder="Enter your username")
-            password = st.text_input("Password", type="password", placeholder="Enter your password")
-            submitted = st.form_submit_button("Log in")
+# ---------- SIGNUP PAGE ----------
+def show_signup():
+    def form():
+        st.markdown("""
+        <h1 style="color:white; margin-bottom:4px;">Create Account</h1>
+        <p style="color:#9ca3af; margin-bottom:24px;">
+            Welcome to the Smart Site System for Oil Depots.<br>
+            Register as a member to get started.
+        </p>
+        """, unsafe_allow_html=True)
 
-        st.markdown(
-            """
-            <div class="auth-note">
-                Use your operator credentials to continue. Once signed in, you can switch between Live Monitoring and Historical Analysis from the left navigation.
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+        username = st.text_input("User Name", key="signup_username")
+        email    = st.text_input("E-mail", key="su_email")
+        password = st.text_input("Password", type="password", key="su_password")
 
-        if submitted:
-            if authenticate(username, password):
-                st.session_state.logged_in = True
-                st.rerun()
+        # Always evaluate strength so confirm field is always present when needed
+        strength = 0
+        if password:
+            strength = show_strength(password)
+
+        # Show confirm field only when password is strong enough
+        confirm = ""
+        if password and strength >= 3:
+            confirm = st.text_input("Re-enter Password", type="password", key="su_confirm")
+
+        agree = st.checkbox("I agree to the terms of service", key="su_agree")
+
+        if st.button("Create Account", key="btn_create"):
+            # --- Validation ---
+            if not username.strip() or not email.strip() or not password:
+                st.warning("⚠️ Please fill in all fields.")
+            elif not re.match(r"^[\w\.-]+@[\w\.-]+\.\w+$", email):
+                st.error("❌ Enter a valid email address.")
+            elif email in st.session_state.users:
+                st.error("❌ An account with this email already exists.")
+            elif strength < 3:
+                st.error("❌ Password is too weak. Improve it before continuing.")
+            elif confirm != password:
+                st.error("❌ Passwords do not match.")
+            elif not agree:
+                st.warning("⚠️ You must accept the terms of service.")
             else:
-                st.error("Invalid credentials")
+                st.session_state.users[email] = {
+                    "name": username.strip(),
+                    "password": password,
+                }
+                st.success("🎉 Account created! Redirecting to login…")
+                st.session_state.mode = "login"
+                st.rerun()
+
+        st.markdown("<p style='color:#9ca3af; margin-top:16px;'>Already have an account?</p>", unsafe_allow_html=True)
+        if st.button("Go to Login", key="btn_go_login"):
+            st.session_state.mode = "login"
+            st.rerun()
+
+    page_layout(form)
+
+
+# ---------- LOGIN PAGE ----------
+def show_login():
+    def form():
+        st.markdown("""
+        <h1 style="color:white; margin-bottom:4px;">Welcome Back</h1>
+        <p style="color:#9ca3af; margin-bottom:24px;">
+            Sign in to access the Predictive Maintenance System.
+        </p>
+        """, unsafe_allow_html=True)
+
+        username = st.text_input("Username", key="li_username")
+        password = st.text_input("Password", type="password", key="li_password")
+
+        if st.button("Login", key="btn_login"):
+            if not username.strip() or not password:
+                st.warning("⚠️ Please enter both username and password.")
+            else:
+                # Use the authenticate function from auth.py
+                if authenticate(username.strip(), password):
+                    st.session_state.logged_in = True
+                    st.session_state.current_user = username.strip()
+                    st.success(f"✅ Welcome back, {username}!")
+                    st.rerun()
+                else:
+                    st.error("❌ Invalid username or password.")
+
+        st.markdown("<p style='color:#9ca3af; margin-top:16px;'>Default login: admin / admin123</p>", unsafe_allow_html=True)
+
+    page_layout(form)
+
 
 
 def advance_stream():
@@ -1923,11 +2174,21 @@ def main_app():
         live_monitoring_dashboard()
 
 
+
 init_session_state()
 sync_theme_mode()
 inject_styles()
+ 
+def run_app():
+    if not st.session_state.logged_in:
+        main()
+    else:
+        try:
+            main_app()
+        except Exception as e:
+            st.error("Dashboard failed to load ⚠️")
+            st.exception(e)
 
-if not st.session_state.logged_in:
-    login()
-else:
-    main_app()
+
+if __name__ == "__main__":
+    run_app()
