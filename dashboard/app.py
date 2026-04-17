@@ -1883,7 +1883,7 @@ def show_signup():
         </p>
         """, unsafe_allow_html=True)
 
-        username = st.text_input("User Name", key="su_username")
+        username = st.text_input("User Name", key="signup_username")
         email    = st.text_input("E-mail", key="su_email")
         password = st.text_input("Password", type="password", key="su_password")
 
@@ -2127,10 +2127,18 @@ init_session_state()
 sync_theme_mode()
 inject_styles()
  
-if not st.session_state.logged_in:
-    if st.session_state.mode == "signup":
-        show_signup()
+# ---------- ENTRY POINT ----------
+def run_app():
+    if not st.session_state.logged_in:
+        main()
     else:
-        show_login()
-else:
-    main_app()
+        try:
+            main_app()
+        except Exception as e:
+            st.error("Dashboard failed to load ⚠️")
+            st.exception(e)
+
+
+if __name__ == "__main__":
+    run_app()
+
