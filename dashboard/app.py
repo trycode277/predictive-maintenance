@@ -6,6 +6,7 @@ import time
 from datetime import datetime, timedelta, timezone
 from html import escape
 
+
 import altair as alt
 import pandas as pd
 import streamlit as st
@@ -1773,11 +1774,7 @@ img_base64 = safe_get_base64(IMG_PATH)
 st.markdown("""
 <style>
 
-/* Hide sidebar */
-section[data-testid="stSidebar"],
-div[data-testid="collapsedControl"] {
-    display: none;
-}
+
 
 .block-container {
     padding: 0rem;
@@ -1967,23 +1964,18 @@ def show_login():
     page_layout(form)
 
 
-# ---------- POST-LOGIN DASHBOARD ----------
-def show_dashboard():
-    name = st.session_state.get("current_user", "User")
-    st.title(f"🛢️ Smart Site System — Oil Depot")
-    st.success(f"Logged in as **{name}**")
-    st.info("Dashboard content goes here.")
 
-    if st.button("Logout"):
-        st.session_state.logged_in = False
-        st.session_state.mode = "login"
-        st.session_state.pop("current_user", None)
-        st.rerun()
 
 
 # ---------- ENTRY POINT ----------
-if __name__ == "__main__" or True:
-    main()
+def run_app():
+    if not st.session_state.logged_in:
+        main()
+
+
+
+if __name__ == "__main__":
+    run_app()
 
 
 
@@ -2130,11 +2122,15 @@ def main_app():
         live_monitoring_dashboard()
 
 
+
 init_session_state()
 sync_theme_mode()
 inject_styles()
-
+ 
 if not st.session_state.logged_in:
-    login()
+    if st.session_state.mode == "signup":
+        show_signup()
+    else:
+        show_login()
 else:
     main_app()
