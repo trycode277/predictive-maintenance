@@ -20,6 +20,7 @@ from data.ingestion import MACHINE_PROFILES, get_live_snapshot
 from data.preprocessing import FEATURE_COLUMNS, preprocess
 from database.db import init_db, load_alerts, save_alert, save_data
 from models.isolation_forest import AnomalyModel
+from data.api_loader import ApiDataLoader
 
 st.markdown("""
 <style>
@@ -2128,6 +2129,7 @@ sync_theme_mode()
 inject_styles()
  
 # ---------- ENTRY POINT ----------
+# ---------- ENTRY POINT ----------
 def run_app():
     if not st.session_state.logged_in:
         main()
@@ -2139,6 +2141,10 @@ def run_app():
             st.exception(e)
 
 
+# ✅ OUTSIDE FUNCTION (VERY IMPORTANT)
 if __name__ == "__main__":
     run_app()
+
+
+
 
