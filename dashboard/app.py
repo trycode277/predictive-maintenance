@@ -2066,6 +2066,7 @@ def advance_stream():
 def live_monitoring_dashboard():
     baselines = build_baselines("data/sample_data.csv")
     model = load_model("data/sample_data.csv")
+    agent = load_agent("data/sample_data.csv")
 
     render_workspace_header(
         "Live monitoring",
@@ -2095,7 +2096,7 @@ def live_monitoring_dashboard():
     states = []
     for machine_id in MACHINE_IDS:
         df = pd.DataFrame(st.session_state.machine_buffers[machine_id])
-        states.append(build_machine_state(machine_id, df, baselines[machine_id], model))
+        states.append(build_machine_state(machine_id, df, baselines[machine_id], model, agent))
 
     update_alert_tracking(states)
     for state in states:
@@ -2134,6 +2135,7 @@ def live_monitoring_dashboard():
         focus_df = pd.DataFrame(st.session_state.machine_buffers[focus_machine])
 
         st.subheader(f"Focus view: {focus_machine}")
+        render_agent_insights(focus_state)
         render_reason_card(
             "Decision explanation",
             focus_state["reasons"] or [focus_state["summary"]],
