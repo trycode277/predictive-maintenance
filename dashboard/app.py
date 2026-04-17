@@ -1966,20 +1966,6 @@ def show_login():
 
 
 
-
-
-# ---------- ENTRY POINT ----------
-def run_app():
-    if not st.session_state.logged_in:
-        main()
-
-
-
-if __name__ == "__main__":
-    run_app()
-
-
-
 def advance_stream():
     snapshot = get_live_snapshot(MACHINE_IDS)
     for raw_reading in snapshot:
@@ -2128,8 +2114,6 @@ init_session_state()
 sync_theme_mode()
 inject_styles()
  
-# ---------- ENTRY POINT ----------
-# ---------- ENTRY POINT ----------
 def run_app():
     if not st.session_state.logged_in:
         main()
@@ -2141,10 +2125,8 @@ def run_app():
             st.exception(e)
 
 
-# ✅ OUTSIDE FUNCTION (VERY IMPORTANT)
 if __name__ == "__main__":
     run_app()
-
 
 
 
