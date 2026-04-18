@@ -16,10 +16,26 @@ def _ensure_file(path):
             json.dump([], file)
 
 
+def _backup_corrupted_file(path):
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    backup_path = f"{path}.corrupt-{stamp}.bak"
+    with open(path, "r", encoding="utf-8") as source:
+        payload = source.read()
+    with open(backup_path, "w", encoding="utf-8") as backup:
+        backup.write(payload)
+    return backup_path
+
+
 def _load_json(path):
     _ensure_file(path)
-    with open(path, "r", encoding="utf-8") as file:
-        return json.load(file)
+    try:
+        with open(path, "r", encoding="utf-8") as file:
+            return json.load(file)
+    except json.JSONDecodeError:
+        # Runtime cache files should not take the dashboard down if they get corrupted.
+        _backup_corrupted_file(path)
+        _save_json(path, [])
+        return []
 
 
 def _save_json(path, payload):

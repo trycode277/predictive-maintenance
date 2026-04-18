@@ -11,7 +11,6 @@ from html import escape
 import altair as alt
 import pandas as pd
 import streamlit as st
-import base64
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -24,14 +23,13 @@ from database.db import init_db, load_alerts, save_alert, save_data
 from models.isolation_forest import AnomalyModel
 from agent.decision_agent import DecisionAgent
 
+st.set_page_config(page_title="AI Predictive Maintenance", layout="wide")
+
 st.markdown("""
 <style>
 button[kind="header"] {display: none;}
 </style>
 """, unsafe_allow_html=True)
-
-
-st.set_page_config(page_title="AI Predictive Maintenance", layout="wide")
 
 MACHINE_IDS = list(MACHINE_PROFILES)
 BUFFER_SIZE = 60
@@ -1819,8 +1817,6 @@ def historical_analysis_dashboard():
 
 
 # ✅ MUST be the very first Streamlit call — never inside a function
-st.set_page_config(layout="wide", page_title="Smart Site System")
-
 # ---------- SESSION STATE DEFAULTS ----------
 if "users" not in st.session_state:
     # Load users from JSON file

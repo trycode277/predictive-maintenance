@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+*.log
+.venv/
+venv/
+.streamlit/secrets.toml
+database/*.corrupt-*.bak
+database/*.merge-conflict.bak
