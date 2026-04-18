@@ -91,7 +91,7 @@ def get_theme_palette():
         "surface_soft": "rgba(11, 16, 26, 0.72)" if use_dark_theme else "rgba(246, 248, 252, 0.92)",
         "border": "rgba(128, 150, 255, 0.18)" if use_dark_theme else "rgba(30, 64, 175, 0.10)",
         "border_soft": "rgba(128, 150, 255, 0.10)" if use_dark_theme else "rgba(15, 23, 42, 0.06)",
-        "sidebar_bg": "linear-gradient(180deg, rgba(8, 10, 18, 0.98) 0%, rgba(14, 23, 46, 0.98) 100%)" if use_dark_theme else "linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(242, 246, 252, 0.98) 100%)",
+        "sidebar_bg": "linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%)",
         "sidebar_border": "rgba(128, 150, 255, 0.12)" if use_dark_theme else "rgba(15, 23, 42, 0.08)",
         "ink": "#f5f7fb" if use_dark_theme else "#132437",
         "muted": "#97a6c5" if use_dark_theme else "#64748b",
@@ -196,7 +196,7 @@ def inject_styles():
         }}
 
         div[data-testid="stSidebar"] {{
-            background: {palette["sidebar_bg"]};
+            background: var(--sidebar-bg, linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%));
             border-right: 1px solid {palette["sidebar_border"]};
         }}
 
@@ -298,9 +298,9 @@ def inject_styles():
         .sidebar-brand {{
             padding: 1.15rem 1.15rem 1rem;
             margin-bottom: 1rem;
-            background:
-                radial-gradient(circle at top right, {palette["glow_a"]}, transparent 26%),
-                linear-gradient(180deg, var(--surface-strong) 0%, var(--surface) 100%);
+            background: var(--sidebar-bg, linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%));
+            border-right: 1px solid {palette["sidebar_border"]};
+            border-radius: 0 18px 18px 0;
         }}
 
         .sidebar-brand-title {{
@@ -1460,10 +1460,9 @@ def render_hero():
         """
         <div class="hero-card">
             <div class="hero-kicker">AI Operations</div>
-            <div class="hero-title">Predictive Maintenance Command Center</div>
+            <div class="hero-title">AI-AGENT</div>
             <div class="hero-copy">
-                Multi-machine monitoring with per-machine baselines, short-horizon thermal forecasting,
-                risk prioritization, transient spike suppression, and persistent alert history.
+                Collects machine data (like temperature and vibration), analyzes it using machine learning models, and predicts potential failures.
             </div>
         </div>
         """,
@@ -1946,7 +1945,7 @@ div[data-testid="stButton"]:last-of-type button:hover {
 # ---------- MAIN ROUTER ----------
 def main():
     if st.session_state.logged_in:
-        show_dashboard()
+        main_app()
     elif st.session_state.mode == "signup":
         show_signup()
     else:
@@ -1959,18 +1958,17 @@ def page_layout(form_fn):
     left, right = st.columns([1.6, 1])
 
     with left:
-        bg = (
-            f"url('data:image/jpeg;base64,{img_base64}')"
+        # Use theme variables for background, overlay image if present
+        bg_style = (
+            f"background: linear-gradient(135deg, var(--bg-top) 0%, var(--bg-bottom) 100%), url('data:image/jpeg;base64,{img_base64}'); background-blend-mode: lighten; background-size: cover; background-position: center;"
             if img_base64
-            else "linear-gradient(135deg,#0f172a,#020617)"
+            else "background: linear-gradient(135deg, var(--bg-top) 0%, var(--bg-bottom) 100%);"
         )
         st.markdown(
             f"""
             <div style="
                 height: 100vh;
-                background: {bg};
-                background-size: cover;
-                background-position: center;
+                {bg_style}
             "></div>
             """,
             unsafe_allow_html=True,
@@ -2289,9 +2287,12 @@ sync_theme_mode()
 inject_styles()
  
 def run_app():
+    # Only show login/signup if not logged in
     if not st.session_state.logged_in:
         main()
     else:
+        # Clear the right panel (login/signup) by using an empty container
+        st.empty()
         try:
             main_app()
         except Exception as e:
